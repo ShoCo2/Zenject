@@ -71,24 +71,6 @@ namespace Zenject.Internal
             CreateProjectContextInternal("Assets/Resources");
         }
 
-        [MenuItem("Assets/Create/Zenject/Default Scene Contract Config", false, 80)]
-        public static void CreateDefaultSceneContractConfig()
-        {
-            var folderPath = ZenUnityEditorUtil.GetCurrentDirectoryAssetPathFromSelection();
-
-            if (!folderPath.EndsWith("/Resources"))
-            {
-                EditorUtility.DisplayDialog("Error",
-                    "ZenjectDefaultSceneContractConfig objects must be placed directly underneath a folder named 'Resources'.  Please try again.", "Ok");
-                return;
-            }
-
-            var config = ScriptableObject.CreateInstance<DefaultSceneContractConfig>();
-
-            ZenUnityEditorUtil.SaveScriptableObjectAsset(
-                Path.Combine(folderPath, DefaultSceneContractConfig.ResourcePath + ".asset"), config);
-        }
-
         [MenuItem("Assets/Create/Zenject/Installer", false, 1)]
         public static void CreateInstaller()
         {
@@ -269,16 +251,6 @@ namespace Zenject.Internal
                 {
                     var numValidated = ZenUnityEditorUtil.ValidateAllActiveScenes();
                     Log.Info("Validated all '{0}' active scenes successfully", numValidated);
-                });
-        }
-
-        static bool ValidateCurrentSceneInternal()
-        {
-            return ZenUnityEditorUtil.SaveThenRunPreserveSceneSetup(() =>
-                {
-                    SceneParentAutomaticLoader.ValidateMultiSceneSetupAndLoadDefaultSceneParents();
-                    ZenUnityEditorUtil.ValidateCurrentSceneSetup();
-                    Log.Info("All scenes validated successfully");
                 });
         }
 
