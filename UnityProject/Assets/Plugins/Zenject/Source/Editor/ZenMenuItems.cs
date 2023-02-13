@@ -10,21 +10,6 @@ namespace Zenject.Internal
 {
     public static class ZenMenuItems
     {
-        [MenuItem("Edit/Zenject/Validate Current Scenes #&v")]
-        public static void ValidateCurrentScene()
-        {
-            ValidateCurrentSceneInternal();
-        }
-
-        [MenuItem("Edit/Zenject/Validate Then Run #&r")]
-        public static void ValidateCurrentSceneThenRun()
-        {
-            if (ValidateCurrentSceneInternal())
-            {
-                EditorApplication.isPlaying = true;
-            }
-        }
-
         [MenuItem("Edit/Zenject/Help...")]
         public static void OpenDocumentation()
         {
